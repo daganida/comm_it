@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workers tasks</title>
+    <h1 class="tasks-header" style="text-align:center">Workers tasks</h1>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/first.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/second.css.css' %}" />
+    <table  marid="example" class="table table-striped table-bordered" cellspacing="0" style="margin-left: 10%;width: 80%;margin-top: 5%;text-align: center;">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+      <th>Tasks list</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for worker, worker_tasks in workers_tasks.items %}
+        {% if workers_tasks %}
+            <tr>
+              <td>{{ worker.user.first_name }}</td>
+              <td>{{ worker.user.last_name }}</td>
+              <td>{{ worker.user.username }}</td>
+              <td>{{ worker_tasks|join:", " }}</td>
+            </tr>
+        {% else %}
+            <tr>
+              <th scope="row">{{ counter|add:"1"}}</th>
+              <td>{{ worker.user.first_name }}</td>
+              <td>{{ worker.user.last_name }}</td>
+              <td>{{ worker.user.username }}</td>
+              <td>{{ "No tasks" }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+</head>
+<body>
+
+</body>
+</html>
