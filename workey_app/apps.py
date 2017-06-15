@@ -5,3 +5,6 @@ from django.apps import AppConfig
 
 class WorkeyAppConfig(AppConfig):
     name = 'workey_app'
+
+    def ready(self):
+        import signals

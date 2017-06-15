@@ -1,18 +1,26 @@
+from django.contrib.auth.models import AnonymousUser
 from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+
 from workey_app.models import Worker
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return HttpResponse('HelloWorld')
+    user = request.user
+    context = {}
+    if user is not AnonymousUser:
+        context['user'] = user
+    return render(request, 'workey/index.html', context)
 
-def workers(request):
+
+@login_required(login_url='/login?next=workers_tasks')
+def workers_tasks(request):
     workers_tasks = {}
     workers = Worker.objects.all()
-    counter = 0
     for worker in workers:
         workers_tasks[worker] = worker.tasks.all()
-    context = {'workers_tasks': workers_tasks, 'counter': counter}
-    return render(request, 'workey/index.html', context)
+    context = {'workers_tasks': workers_tasks}
+    return render(request, 'workey/workers_tasks.html', context)
+

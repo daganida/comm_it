@@ -10,20 +10,12 @@ class Worker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __repr__(self):
-        return self.user.username
+        return self.user.first_name + ' ' +self.user.last_name
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name + ' ' +self.user.last_name
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Worker.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.worker.save()
 
 class Task(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)

@@ -11,6 +11,6 @@ admin.site.register(Task)
 admin.site.unregister(User)
 
 class MyUserAdmin(admin.ModelAdmin):
-    exclude = ('last_login', 'groups', 'user_permissions', 'is_active','date_joined', 'is_staff', 'is_superuser')
+    exclude = ('last_login', 'groups', 'user_permissions', 'is_active','date_joined', 'is_staff', 'is_superuser', 'password')
 
 admin.site.register(User,MyUserAdmin)
