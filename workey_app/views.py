@@ -1,13 +1,11 @@
 from django.contrib.auth.models import AnonymousUser
-from django.http import HttpResponse
 from django.shortcuts import render
-
-
 from workey_app.models import Worker
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
+
     user = request.user
     context = {}
     if user is not AnonymousUser:
@@ -23,4 +21,3 @@ def workers_tasks(request):
         workers_tasks[worker] = worker.tasks.all()
     context = {'workers_tasks': workers_tasks}
     return render(request, 'workey/workers_tasks.html', context)
-

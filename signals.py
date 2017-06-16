@@ -5,15 +5,25 @@ from workey_app.models import Worker
 
 @receiver(post_save, sender=User, dispatch_uid='a1b2c4d4')
 def create_worker(sender, instance, **kwargs):
-     created = kwargs.get('created')
-     if created:
+    """
+    Should create a worker every time a user was created
+    :param sender: User model
+    :param instance: User instance
+    """
+    created = kwargs.get('created')
+    if created:
          Worker.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User,dispatch_uid='a1b2c4d4')
 def update_worker(sender, instance, **kwargs):
-     created = kwargs.get('created')
-     if not created:
+    """
+    Should update a worker instance once the related user was updated
+    :param sender: User model
+    :param instance: User instance
+    """
+    created = kwargs.get('created')
+    if not created:
          Worker.objects.save()
 
 

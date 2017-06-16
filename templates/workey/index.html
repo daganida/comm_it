@@ -9,10 +9,7 @@
            <input style="margin-top: 10%" type="submit" value="Logout"/>
        </form>
         <h3 class="page-header" style="text-align:center">Welcome {{ user.first_name }} {{ user.last_name }}</h3>
-        <form  style="alignment: center" method="POST" action="{% url 'workers_tasks' %}">
-           {% csrf_token %}
-           <input style="margin-left: 45%" type="submit" value="View workers tasks"/>
-       </form>
+
     {% else %}
         <form style="margin-left: 90%" method="GET" action="{% url 'login' %}">
            {% csrf_token %}
@@ -22,6 +19,10 @@
 
 
     {% endif %}
+        <form  style="alignment: center" method="POST" action="{% url 'workers_tasks' %}">
+           {% csrf_token %}
+           <input style="margin-left: 45%" type="submit" value="View workers tasks"/>
+       </form>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
