@@ -1,7 +1,13 @@
+"""
+This module represents sub command load_workers for inserting records from csv to database
+"""
 import csv
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+import logging
+
+logger = logging.getLogger()
 
 
 class Command(BaseCommand):
@@ -20,14 +26,17 @@ class Command(BaseCommand):
             with open(file_path) as csvfile:
                 reader = csv.DictReader(csvfile)
                 user_records = [record for record in reader]
-                # The first three rows contain irrelevant data
                 for user_record in user_records:
-                    if user_record['Username']:
-                        try:
-                            User.objects.create(first_name=user_record['FirstName'], last_name=user_record['LastName'],
-                                                username=user_record['Username'], password=user_record['Password'])
-                        except Exception:
-                            print 'Could not create  %s' % user_record['Username']
+                    try:
+                        User.objects.create(
+                            first_name=user_record['FirstName'],
+                            last_name=user_record['LastName'],
+                            username=user_record['Username'],
+                            password=user_record['Password']
+                        )
+                    except Exception:
+                        logger.exception('Could not create  %s' % user_record['Username'])
         except Exception:
             raise CommandError('Could not import worker records from file %s' % file_path)
+
         self.stdout.write(self.style.SUCCESS('Successfully imported tasks and workers from file %s ' % file_path))
