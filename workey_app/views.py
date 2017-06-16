@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'workey/index.html', context)
 
 
-@login_required(login_url='/login?next=workers_tasks')
+@login_required(login_url='/login')
 def workers_tasks(request):
     workers = Worker.objects.all()
     context = {'workers': workers}
