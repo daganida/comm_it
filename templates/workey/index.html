@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/first.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/second.css' %}" />
     <title>Welcome Page</title>
     {% if user.id %}
         <form style="margin-left: 90%" method="POST" action="{% url 'logout' %}">
@@ -23,11 +28,6 @@
            {% csrf_token %}
            <input style="margin-left: 45%" type="submit" value="View workers tasks"/>
        </form>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/first.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/second.css.css' %}" />
 </head>
 <body>
 

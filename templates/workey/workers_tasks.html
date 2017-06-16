@@ -5,10 +5,10 @@
     <title>Workers tasks</title>
     <h1 class="tasks-header" style="text-align:center">Workers tasks</h1>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/first.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/second.css.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'workey_app/css/second.css' %}" />
     <form style="margin-left: 90%" method="POST" action="{% url 'logout' %}">
        {% csrf_token %}
        <input style="margin-top: 10%" type="submit" value="Logout"/>
@@ -27,13 +27,13 @@
     </tr>
   </thead>
   <tbody>
-    {% for worker, worker_tasks in workers_tasks.items %}
-        {% if workers_tasks %}
+    {% for worker in workers %}
+        {% if worker.tasks %}
             <tr>
               <td>{{ worker.user.first_name }}</td>
               <td>{{ worker.user.last_name }}</td>
               <td>{{ worker.user.username }}</td>
-              <td>{{ worker_tasks|join:", " }}</td>
+              <td>{{ worker.tasks.all|join:", " }}</td>
             </tr>
         {% else %}
             <tr>

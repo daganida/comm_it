@@ -15,9 +15,6 @@ def index(request):
 
 @login_required(login_url='/login?next=workers_tasks')
 def workers_tasks(request):
-    workers_tasks = {}
     workers = Worker.objects.all()
-    for worker in workers:
-        workers_tasks[worker] = worker.tasks.all()
-    context = {'workers_tasks': workers_tasks}
+    context = {'workers': workers}
     return render(request, 'workey/workers_tasks.html', context)
