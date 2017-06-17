@@ -1,9 +1,6 @@
-import argparse
-
 from django.test import TestCase
 from django.core.management import call_command
 from django.utils.six import StringIO
-
 from workey_app.models import Worker
 
 
@@ -25,4 +22,3 @@ class CommandsTestCase(TestCase):
             user_records = [record for record in reader]
             records_number = len(user_records)
             self.assertEqual(records_number, Worker.objects.all().count())
-
