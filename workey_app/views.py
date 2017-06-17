@@ -15,6 +15,9 @@ def index(request):
 
 @login_required(login_url='/login')
 def workers_tasks(request):
-    workers = Worker.objects.all()
-    context = {'workers': workers}
+    user = request.user
+    context = {}
+    if user is not AnonymousUser:
+        worker = user.worker
+        context['worker'] = worker
     return render(request, 'workey/workers_tasks.html', context)
